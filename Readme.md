@@ -4,7 +4,7 @@
 ## 진행 일정 : 2020-04-22 ~ 2020-05-08  
 
 ## 참여자 GitHub  
-1. [cafeCoder](https://github.com/hwk0911)  
+1. [cafeCoder](https://github.com/hwk0911)  :  [BLOG](https://cafecoder.tistory.com)
 2. [dofany](https://github.com/dofany)  
 
 ## 목차 
