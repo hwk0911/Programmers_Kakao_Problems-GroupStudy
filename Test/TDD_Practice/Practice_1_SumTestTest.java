@@ -34,4 +34,13 @@ class Practice_1_SumTestTest {
             System.out.println(a + " + " + b + " = " + "NOT " + answer);
         }
     }
+
+    @Test
+    void getMul() {
+        int a = 3;
+        int b = 5;
+        int answer = 15;
+
+        assertThat(answer, is(p1s.getMul(a, b)));
+    }
 }
