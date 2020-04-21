@@ -10,4 +10,5 @@ public class Practice_1_SumTest {
     public int getSum (int a, int b) {
         return a + b;
     }
+    public int getMul (int a, int b) { return a * b; }
 }
