@@ -8,7 +8,7 @@
 2. [dofany](https://github.com/dofany)  
 
 ## 개발 도구  
-IDE : IntelliJ IDEA
+IDE : IntelliJ IDEA    
 TDD : Junit5 + Hamcrest2.2  
 
 ## 협업 도구  
