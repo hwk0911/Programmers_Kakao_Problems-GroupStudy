@@ -7,6 +7,14 @@
 1. [cafeCoder](https://github.com/hwk0911)  :  [BLOG](https://cafecoder.tistory.com)
 2. [dofany](https://github.com/dofany)  
 
+## 개발 도구  
+IDE : IntelliJ IDEA
+TDD : Junit5 + Hamcrest2.2  
+
+## 협업 도구  
+Git       : GitHub  
+Messanger : Slack
+
 ## 목차 
     1. 2018년 KAKAO BLIND RECRUITMENT  
     2. 2019년 KAKAO BLIND RECRUITMENT  
@@ -16,4 +24,4 @@
     6. 2017년 카카오코드 본선  
 
 
-### 2017년 카카오코드 예선   
+### 2018년 KAKAO BLIND RECRUITMENT   
