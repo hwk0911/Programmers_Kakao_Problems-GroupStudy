@@ -6,7 +6,6 @@
 ## 참여자 GitHub  
 1. [cafeCoder](https://github.com/hwk0911)  
 2. [dofany](https://github.com/dofany)  
-3. 이후 미정
 
 ## 목차 
     1. 2018년 KAKAO BLIND RECRUITMENT  
