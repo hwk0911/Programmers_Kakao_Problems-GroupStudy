@@ -1,50 +1,50 @@
 package Programmers_KAKAO_BLIND_RECRUITMENT_2018;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.StringTokenizer;
 
 public class 추석트래픽_cafeCoder {
     public int solution(String[] lines) {
         int answer = 1;
+        List<Double[]> startToEnd = new ArrayList<>();
 
         for (int index = 0, size = lines.length; index < size; ++index) {
             lines[index] = lines[index].substring(11);
+
+            String[] line = lines[index].split(" ");
+
+            Double[] tempTime = new Double[2];
+            tempTime[1] = getEndTime(line[0]);
+            tempTime[0] = getStartTime(tempTime[1], line[1]);
+
+            startToEnd.add(tempTime);
         }
 
-        for(int index = 0, size = lines.length ; index < size; ++index) {
-            String[] schedules = lines[index].split(" ");
-            double standard = getEndTime(schedules[0]);
-            standard = getStartTime(standard, schedules[1]);
-            int tempAnswer = 1;
-
-            for(int index_2 = 0 ; index_2 < size ; ++index_2) {
-                if(index == index_2) {
-                    continue;
-                }
-                else {
-                    schedules = lines[index_2].split(" ");
-                    double scheduleEnd = getEndTime(schedules[0]);
-                    double scheduleStart = getStartTime(scheduleEnd, schedules[1]);
-
-                    if (containSec(standard, scheduleStart, scheduleEnd)) {
-                        ++tempAnswer;
-                    }
-                }
-            }
-            answer = Math.max(answer, tempAnswer);
-            System.out.println();
+        for(Double[] doubles : startToEnd) {
+            answer = Math.max(answer, containSec(doubles, startToEnd));
         }
+
 
         return answer;
     }
 
-    public boolean containSec(double standard, double scheduleStart, double scheduleEnd) {
-        if(standard <= scheduleStart || standard + 1 >= scheduleStart) {
-            return true;
+    public int containSec(Double[] standard, List<Double[]> startToEnd) {
+        int answer = 0;
+
+        for(double time = standard[0], end = standard[1] ; time <= end ; time += 0.001) {
+            System.out.println(time);
+            int tempAnswer = 0;
+            for(Double[] doubles : startToEnd) {
+                if(doubles[0] <= time && time <= doubles[1]) {
+                    ++tempAnswer;
+                }
+            }
+
+            answer = Math.max(answer, tempAnswer);
         }
-        else if(standard <= scheduleEnd || standard + 1 >= scheduleEnd) {
-            return true;
-        }
-        return false;
+
+        return answer;
     }
 
     public double getEndTime(String endSchedule) {
@@ -65,10 +65,10 @@ public class 추석트래픽_cafeCoder {
     public double getStartTime(double endTime, String need) {
         double startTime = endTime - Double.parseDouble(need.substring(0, need.length() - 1));
 
-        return startTime + 0.001;
+        return startTime;
     }
 }
 
 /*
-시작 또는 마지막 전이 포함되어있으면 true 반환하는걸로.
+브루트 포스 방식으로 변경
  */
