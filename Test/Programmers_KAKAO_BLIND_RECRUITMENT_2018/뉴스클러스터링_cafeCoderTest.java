@@ -28,14 +28,34 @@ class 뉴스클러스터링_cafeCoderTest {
         str2 = "AAAA12";
         answer = 43690;
 
-        assertThat(answer, is(main.solution(str1, str2)));
+        //assertThat(answer, is(main.solution(str1, str2)));
 
 
         str1 = "E=M*C^2";
         str2 = "e=m*c^2";
         answer = 65536;
 
+        //assertThat(answer, is(main.solution(str1, str2)));
+
+        str1 = "";
+        str2 = "";
+        answer = 65536;
+
+        //assertThat(answer, is(main.solution(str1, str2)));
+
+
+        str1 = "45682123";
+        str2 = "456456648978946";
+        answer = 65536;
+
+        //assertThat(answer, is(main.solution(str1, str2)));
+
+        str1 = "AAAABBBBCC";
+        str2 = "AABBBBDDEE";
+        answer = 28086;
+
         assertThat(answer, is(main.solution(str1, str2)));
+
 
 
     }

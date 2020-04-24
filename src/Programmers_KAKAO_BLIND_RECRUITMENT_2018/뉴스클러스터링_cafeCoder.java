@@ -1,7 +1,6 @@
 package Programmers_KAKAO_BLIND_RECRUITMENT_2018;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 public class 뉴스클러스터링_cafeCoder {
@@ -22,8 +21,9 @@ public class 뉴스클러스터링_cafeCoder {
     public int j (Double sum, Double intersection) {
         Double j = intersection / sum * 65536;
 
-        System.out.println(intersection);
-        System.out.println(sum);
+        if(sum == 0 && intersection == 0) {
+            return 65536;
+        }
 
         return j.intValue();
     }
@@ -47,31 +47,37 @@ public class 뉴스클러스터링_cafeCoder {
             }
         }
 
-        for(String temp : word) {
-            System.out.println(temp);
-        }
-        System.out.println();
+        System.out.println(word);
 
         return word;
     }
 
     public Double sum (List<String> list1, List<String> list2) {
-        return list1.size() + list2.size() + 0.0;
+        Double overlap = intersection(list1, list2);
+
+        System.out.println(list1.size() + list2.size() - overlap);
+
+        return list1.size() + list2.size() - overlap;
     }
 
     public Double intersection (List<String> list1, List<String> list2) {
-        HashSet<String> hashSet = new HashSet<>();
+        Double ret1 = 0.0;
+        Double ret2 = 0.0;
 
         for(String str : list1) {
             if(list2.contains(str)) {
-                hashSet.add(str);
+                ++ret1;
             }
         }
 
-        return hashSet.size() + 0.0;
-    }
+        for(String str : list2) {
+            if(list1.contains(str)) {
+                ++ret2;
+            }
+        }
 
-    /*
-    중복 합집합 처리할것.
-     */
+        System.out.println(Math.min(ret1, ret2));
+
+        return Math.min(ret1,ret2);
+    }
 }
