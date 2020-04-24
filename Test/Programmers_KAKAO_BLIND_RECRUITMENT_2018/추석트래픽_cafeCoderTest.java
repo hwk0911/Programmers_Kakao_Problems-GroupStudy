@@ -23,20 +23,21 @@ class 추석트래픽_cafeCoderTest {
             System.out.println(st.countTokens());
         }
 
-        assertThat(4202.002,is(main.getEndTime(time)));
+
+
+        assertThat(4202002,is(main.castingInteger(time)));
     }
 
     @Test
     void getStartTime() {
-        double startTime = 4202.022;
-        String need = "2.0s";
+        int startTime = 4202022;
+        String need = "2s";
 
-        assertThat(4200.022, is(main.getStartTime(startTime, need)));
+        assertThat(4200022, is(main.getStartTime(startTime, need)));
     }
 
     @Test
     void solution() {
-        /*
         String[] lines = {
                 "2016-09-15 20:59:57.421 0.351s",
                 "2016-09-15 20:59:58.233 1.181s",
@@ -52,14 +53,22 @@ class 추석트래픽_cafeCoderTest {
         assertThat(7, is(main.solution(lines)));
 
 
-         */
         System.out.println();
         System.out.println();
 
         String[] lines_2 = {
-                "2016-09-15 01:00:04.002 2.0s", "2016-09-15 01:00:07.000 2s"
+                "2016-09-15 01:00:04.002 2.0s",
+                "2016-09-15 01:00:07.000 2s"
         };
 
-        assertThat(1, is(main.solution(lines_2)));
+        assertThat(2, is(main.solution(lines_2)));
+
+        String[] lines_3 = {
+                "2016-09-15 01:00:04.001 2.0s",
+                "2016-09-15 01:00:07.000 2s"
+        };
+
+        assertThat(1, is(main.solution(lines_3)));
+
     }
 }

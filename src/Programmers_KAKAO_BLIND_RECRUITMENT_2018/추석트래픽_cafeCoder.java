@@ -6,69 +6,98 @@ import java.util.StringTokenizer;
 
 public class 추석트래픽_cafeCoder {
     public int solution(String[] lines) {
-        int answer = 1;
-        List<Double[]> startToEnd = new ArrayList<>();
-
-        for (int index = 0, size = lines.length; index < size; ++index) {
-            lines[index] = lines[index].substring(11);
-
-            String[] line = lines[index].split(" ");
-
-            Double[] tempTime = new Double[2];
-            tempTime[1] = getEndTime(line[0]);
-            tempTime[0] = getStartTime(tempTime[1], line[1]);
-
-            startToEnd.add(tempTime);
-        }
-
-        for(Double[] doubles : startToEnd) {
-            answer = Math.max(answer, containSec(doubles, startToEnd));
-        }
-
-
-        return answer;
-    }
-
-    public int containSec(Double[] standard, List<Double[]> startToEnd) {
         int answer = 0;
 
-        for(double time = standard[0], end = standard[1] ; time <= end ; time += 0.001) {
-            System.out.println(time);
-            int tempAnswer = 0;
-            for(Double[] doubles : startToEnd) {
-                if(doubles[0] <= time && time <= doubles[1]) {
-                    ++tempAnswer;
+        List<Integer[]> schedules = new ArrayList<>();
+
+        for (String line : lines) {
+            StringTokenizer st = new StringTokenizer(line);
+            st.nextToken();
+
+            Integer[] schedule = new Integer[2];
+            schedule[1] = castingInteger(st.nextToken());
+            schedule[0] = getStartTime(schedule[1], st.nextToken());
+
+            schedules.add(schedule);
+        }
+
+        for(Integer[] schedule : schedules) {
+            int timeCheck = 0;
+            int start = schedule[0];
+            int end = start + 998;
+
+            for(Integer[] index : schedules) {
+                int tempStart = index[0];
+                int tempEnd = index[1];
+
+                if(start <= tempStart && tempStart <= end) {
+                    ++timeCheck;
+                }
+                else if(start <= tempEnd && tempEnd <= end) {
+                    ++timeCheck;
+                }
+                else if(tempStart <= start && end < tempEnd) {
+                    ++timeCheck;
                 }
             }
 
-            answer = Math.max(answer, tempAnswer);
-        }
+            answer = Math.max(answer, timeCheck);
+            timeCheck = 0;
 
+
+            start = schedule[1];
+            end = schedule[1] + 998;
+
+            for(Integer[] index : schedules) {
+                int tempStart = index[0];
+                int tempEnd = index[1];
+
+                if(start <= tempStart && tempStart <= end) {
+                    ++timeCheck;
+                }
+                else if(start <= tempEnd && tempEnd <= end) {
+                    ++timeCheck;
+                }
+                else if(tempStart <= start && end <= tempEnd) {
+                    ++timeCheck;
+                }
+            }
+
+            answer = Math.max(answer, timeCheck);
+        }
         return answer;
     }
 
-    public double getEndTime(String endSchedule) {
-        double endTime = 0;
+    public Integer castingInteger(String line) {
+        Integer retTime = 0;
 
-        StringTokenizer st = new StringTokenizer(endSchedule, ":");
+        StringTokenizer st = new StringTokenizer(line, ":");
 
         while (st.hasMoreTokens()) {
-            if (st.countTokens() != 0) {
-                endTime *= 60;
+            if (st.countTokens() != 1) {
+                retTime += Integer.parseInt(st.nextToken());
+                retTime *= 60;
+            } else {
+                String[] temp = st.nextToken().split("\\.");
+                retTime += Integer.parseInt(temp[0]);
+                retTime *= 1000;
+                retTime += Integer.parseInt(temp[1]);
             }
-            endTime += Double.parseDouble(st.nextToken());
         }
 
-        return endTime;
+        return retTime;
     }
 
-    public double getStartTime(double endTime, String need) {
-        double startTime = endTime - Double.parseDouble(need.substring(0, need.length() - 1));
+    public Integer getStartTime(Integer end, String s) {
+        String[] temp = s.substring(0, s.length() - 1).split("\\.");
 
-        return startTime;
+        if(temp.length == 2) {
+            end -= (Integer.parseInt(temp[0]) * 1000) + Integer.parseInt(temp[1]);
+        }
+        else {
+            end -= (Integer.parseInt(temp[0]) * 1000);
+        }
+
+        return end;
     }
 }
-
-/*
-브루트 포스 방식으로 변경
- */
