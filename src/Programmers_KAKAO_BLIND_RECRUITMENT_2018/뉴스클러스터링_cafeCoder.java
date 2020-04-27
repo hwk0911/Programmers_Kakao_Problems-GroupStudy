@@ -13,7 +13,11 @@ public class 뉴스클러스터링_cafeCoder {
         List<String> strList1 = setList(str1);
         List<String> strList2 = setList(str2);
 
-        answer = j(sum(strList1, strList2), intersection(strList1, strList2));
+        Double sumCount = strList1.size() + strList2.size() + 0.0;
+        Double interCount = intersection(strList1, strList2);
+        sumCount -= interCount;
+
+        answer = j(sumCount, interCount);
 
         return answer;
     }
@@ -47,37 +51,26 @@ public class 뉴스클러스터링_cafeCoder {
             }
         }
 
-        System.out.println(word);
-
         return word;
     }
 
-    public Double sum (List<String> list1, List<String> list2) {
-        Double overlap = intersection(list1, list2);
-
-        System.out.println(list1.size() + list2.size() - overlap);
-
-        return list1.size() + list2.size() - overlap;
-    }
-
     public Double intersection (List<String> list1, List<String> list2) {
-        Double ret1 = 0.0;
-        Double ret2 = 0.0;
+        Double ret = 0.0;
 
-        for(String str : list1) {
-            if(list2.contains(str)) {
-                ++ret1;
+        for(int index = 0 ; index < list1.size() ; ++index) {
+            if (list2.remove(list1.get(index))) {
+                list1.remove(index);
+                ++ret;
             }
         }
 
-        for(String str : list2) {
-            if(list1.contains(str)) {
-                ++ret2;
+        for(int index = 0 ; index < list2.size() ; ++index) {
+            System.out.println(list1.size() + " " + list2.size());
+            if (list1.remove(list2.get(index))) {
+                ++ret;
             }
         }
 
-        System.out.println(Math.min(ret1, ret2));
-
-        return Math.min(ret1,ret2);
+        return ret;
     }
 }
