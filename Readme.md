@@ -26,3 +26,4 @@ Messanger : Slack
 
 ### 2018년 KAKAO BLIND RECRUITMENT   
   1. [추석 트래픽](https://programmers.co.kr/learn/courses/30/lessons/17676)  
+  2. [뉴스 클러스터링](https://programmers.co.kr/learn/courses/30/lessons/17677)  
